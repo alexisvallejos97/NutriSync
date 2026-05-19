@@ -17,8 +17,9 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Documentación de partes (se generan localmente por cada integrante)
-Documentacion-parte*.md
+# Todos los archivos .md
+**.md
+database/
 docs/
 
 # Entorno local
