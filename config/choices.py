@@ -1,41 +1,104 @@
-from django.db import models
+# config/choices.py
+# Choices centralizados para todo el proyecto NutriSync.
+# Se define aquí para evitar duplicación entre apps y facilitar cambios globales.
+
+class Sexo:
+    MASCULINO = "M"
+    FEMENINO = "F"
+    CHOICES = [
+        (MASCULINO, "Masculino"),
+        (FEMENINO, "Femenino"),
+    ]
 
 
-# Opciones predefinidas para asegurar integridad de datos (usado en modelos y formularios)
-class TipoComida(models.TextChoices):
-    DESAYUNO = "DE", "Desayuno"
-    ALMUERZO = "AL", "Almuerzo"
-    CENA = "CE", "Cena"
-    SNACK = "SN", "Snack"
+class TipoCita:
+    PRIMERA_CONSULTA = "primera_consulta"
+    SEGUIMIENTO = "seguimiento"
+    CONTROL = "control"
+    EVALUACION = "evaluacion"
+    CHOICES = [
+        (PRIMERA_CONSULTA, "Primera Consulta"),
+        (SEGUIMIENTO, "Seguimiento"),
+        (CONTROL, "Control"),
+        (EVALUACION, "Evaluación"),
+    ]
 
 
-class Sexo(models.TextChoices):
-    MASCULINO = "M", "Masculino"
-    FEMENINO = "F", "Femenino"
+class EstadoCita:
+    PROGRAMADA = "programada"
+    COMPLETADA = "completada"
+    CANCELADA = "cancelada"
+    NO_ASISTIO = "no_asistio"
+    CHOICES = [
+        (PROGRAMADA, "Programada"),
+        (COMPLETADA, "Completada"),
+        (CANCELADA, "Cancelada"),
+        (NO_ASISTIO, "No asistió"),
+    ]
 
 
-class NivelActividad(models.TextChoices):
-    SEDENTARIO = "SE", "Sedentario"
-    LIGERO = "LI", "Ligero"
-    MODERADO = "MO", "Moderado"
-    INTENSO = "IN", "Intenso"
-    MUY_INTENSO = "MI", "Muy intenso"
+class TipoComida:
+    DESAYUNO = "desayuno"
+    ALMUERZO = "almuerzo"
+    CENA = "cena"
+    SNACK = "snack"
+    CHOICES = [
+        (DESAYUNO, "Desayuno"),
+        (ALMUERZO, "Almuerzo"),
+        (CENA, "Cena"),
+        (SNACK, "Snack"),
+    ]
 
 
-class Objetivo(models.TextChoices):
-    PERDER_PESO = "PP", "Perder peso"
-    MANTENER = "MA", "Mantener peso"
-    GANAR_MASA = "GM", "Ganar masa muscular"
+class DiaSemana:
+    LUNES = "lunes"
+    MARTES = "martes"
+    MIERCOLES = "miercoles"
+    JUEVES = "jueves"
+    VIERNES = "viernes"
+    SABADO = "sabado"
+    DOMINGO = "domingo"
+    CHOICES = [
+        (LUNES, "Lunes"),
+        (MARTES, "Martes"),
+        (MIERCOLES, "Miércoles"),
+        (JUEVES, "Jueves"),
+        (VIERNES, "Viernes"),
+        (SABADO, "Sábado"),
+        (DOMINGO, "Domingo"),
+    ]
 
 
-class TipoEjercicio(models.TextChoices):
-    CARDIO = "CA", "Cardio"
-    FUERZA = "FU", "Fuerza"
-    YOGA = "YO", "Yoga"
-    CAMINATA = "CM", "Caminata"
-    OTRO = "OT", "Otro"
+class Objetivo:
+    PERDIDA_PESO = "perdida_peso"
+    GANANCIA_MUSCULAR = "ganancia_muscular"
+    MANTENIMIENTO = "mantenimiento"
+    SALUD_GENERAL = "salud_general"
+    CHOICES = [
+        (PERDIDA_PESO, "Pérdida de peso"),
+        (GANANCIA_MUSCULAR, "Ganancia muscular"),
+        (MANTENIMIENTO, "Mantenimiento"),
+        (SALUD_GENERAL, "Salud general"),
+    ]
 
 
-class EstadoGeneral(models.IntegerChoices):
-    ACTIVO = 1, "Activo"
-    DE_BAJA = 9, "De baja"
+class TipoNota:
+    CONSULTA = "consulta"
+    SEGUIMIENTO = "seguimiento"
+    OBSERVACION = "observacion"
+    RECETA = "receta"
+    CHOICES = [
+        (CONSULTA, "Consulta"),
+        (SEGUIMIENTO, "Seguimiento"),
+        (OBSERVACION, "Observación"),
+        (RECETA, "Receta"),
+    ]
+
+
+class EstadoNutricionista:
+    HABILITADO = "habilitado"
+    DESHABILITADO = "deshabilitado"
+    CHOICES = [
+        (HABILITADO, "Habilitado"),
+        (DESHABILITADO, "Deshabilitado"),
+    ]

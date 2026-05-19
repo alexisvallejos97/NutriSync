@@ -1,30 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}NutriSync{% endblock %}</title>
+    <meta name="description" content="NutriSync — Plataforma de gestión profesional para nutricionistas">
+    <title>{% block title %}NutriSync{% endblock %} — NutriSync</title>
+
+    <!-- Inter font: tipografía limpia y profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN Play -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/css/custom.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS personalizado -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    {% block extra_head %}{% endblock %}
 </head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex">
 
-<body class="bg-gray-100 min-h-screen">
-    {% include 'navbar.html' %}
-    <div class="container mx-auto px-4 py-6">
-        {% if messages %}
-        {% for message in messages %}
-        <div class="mb-4 p-4 rounded-lg
-            {% if message.tags == 'success' %}bg-green-100 text-green-800
-            {% elif message.tags == 'error' %}bg-red-100 text-red-800
-            {% else %}bg-blue-100 text-blue-800{% endif %}">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
+    <!-- ─── Sidebar ────────────────────────────────── -->
+    {% include "components/sidebar.html" %}
 
-        {% block content %}{% endblock %}
+    <!-- ─── Área de contenido ──────────────────────── -->
+    <div class="flex-1 flex flex-col min-h-screen ml-60">
+
+        <!-- Header -->
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+            <h1 class="text-xl font-semibold text-slate-800">{% block page_title %}Dashboard{% endblock %}</h1>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-slate-500">
+                    {{ perfil.nombre_completo|default:user.username }}
+                </span>
+                <a href="{% url 'core:logout' %}"
+                   class="text-sm text-slate-400 hover:text-red-500 transition-colors duration-200">
+                    Cerrar sesión
+                </a>
+            </div>
+        </header>
+
+        <!-- Mensajes de éxito / error / info -->
+        {% include "components/messages.html" %}
+
+        <!-- Contenido principal -->
+        <main class="flex-1 p-8">
+            {% block content %}{% endblock %}
+        </main>
+
     </div>
-</body>
 
+    <script>
+      lucide.createIcons();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
 </html>

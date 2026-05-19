@@ -1,0 +1,101 @@
+<!-- templates/core/perfil.html -->
+<!-- Edición del perfil profesional del nutricionista. -->
+
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+{% block page_title %}Mi Perfil Profesional{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
+
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-slate-800">Información Profesional</h2>
+            <p class="text-slate-500 text-sm mt-1">
+                Estos datos aparecen en el sistema y en las comunicaciones con pacientes.
+            </p>
+        </div>
+
+        <form method="post" action="{% url 'core:perfil' %}" novalidate>
+            {% csrf_token %}
+
+            <div class="space-y-5">
+
+                <!-- Nombre completo -->
+                <div>
+                    <label for="{{ form.nombre_completo.id_for_label }}"
+                           class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                        Nombre completo *
+                    </label>
+                    {{ form.nombre_completo }}
+                    {% if form.nombre_completo.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.nombre_completo.errors|join:", " }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Especialidad -->
+                <div>
+                    <label for="{{ form.especialidad.id_for_label }}"
+                           class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                        Especialidad
+                    </label>
+                    {{ form.especialidad }}
+                </div>
+
+                <!-- Fila: Teléfono + Colegiatura -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="{{ form.telefono.id_for_label }}"
+                               class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                            Teléfono
+                        </label>
+                        {{ form.telefono }}
+                    </div>
+                    <div>
+                        <label for="{{ form.numero_colegiatura.id_for_label }}"
+                               class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                            N° de Colegiatura
+                        </label>
+                        {{ form.numero_colegiatura }}
+                    </div>
+                </div>
+
+                <!-- Email profesional -->
+                <div>
+                    <label for="{{ form.email_profesional.id_for_label }}"
+                           class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                        Email profesional
+                    </label>
+                    {{ form.email_profesional }}
+                </div>
+
+                <!-- Dirección del consultorio -->
+                <div>
+                    <label for="{{ form.direccion_consultorio.id_for_label }}"
+                           class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                        Dirección del consultorio
+                    </label>
+                    {{ form.direccion_consultorio }}
+                </div>
+
+            </div>
+
+            <!-- Acciones -->
+            <div class="flex items-center gap-3 mt-6 pt-6 border-t border-slate-100">
+                <button type="submit"
+                        class="bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg px-5 py-2 text-sm
+                               transition-all duration-200 shadow-sm hover:shadow-md">
+                    Guardar cambios
+                </button>
+                <a href="{% url 'core:dashboard' %}"
+                   class="border border-slate-300 text-slate-600 hover:bg-slate-50 rounded-lg px-5 py-2 text-sm
+                          transition-all duration-200">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+/* static/css/custom.css */
+/* Variables CSS y estilos base complementarios a Tailwind CDN. */
+/* Se definen aquí para evitar repetir clases en cada template. */
+
+/* ─── Utilidades del sidebar ─────────────────────────────────────────────── */
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.875rem;     /* text-sm */
+    color: #CBD5E1;          /* slate-300 */
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+.sidebar-link.active {
+    background-color: #0D9488; /* teal-600 */
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* ─── Transiciones suaves globales ───────────────────────────────────────── */
+
+a, button, input, select, textarea {
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+}
+
+/* ─── Scroll suave ───────────────────────────────────────────────────────── */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ─── Focus visible para accesibilidad ──────────────────────────────────── */
+/* Tailwind oculta el outline por defecto; lo restauramos para teclado */
+
+:focus-visible {
+    outline: 2px solid #0D9488;
+    outline-offset: 2px;
+}

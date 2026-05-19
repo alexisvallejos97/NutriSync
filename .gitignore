@@ -5,6 +5,7 @@ __pycache__/
 db.sqlite3
 .DS_Store
 staticfiles/
-PLAN_CONSTRUCCION.md
-database/BASE_DE_DATOS.md
-database/schema.sql
+**/*.md
+database/
+**/*.sql
+docs/

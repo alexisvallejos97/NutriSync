@@ -1,0 +1,54 @@
+<!-- templates/core/dashboard.html -->
+<!-- Dashboard principal — Parte 1: placeholder con cards vacías. -->
+<!-- La Parte 6 reemplazará las cards con datos reales. -->
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+
+    <!-- Bienvenida -->
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            Bienvenido, {{ perfil.nombre_completo|default:user.username }} 
+            <i data-lucide="hand" class="w-5 h-5 text-amber-500"></i>
+        </h2>
+        <p class="text-slate-500 text-sm mt-1">
+            Este es tu panel de control. Aquí verás el resumen del día cuando el sistema esté completo.
+        </p>
+    </div>
+
+    <!-- Cards de métricas — placeholder -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wide">Pacientes activos</p>
+            <p class="text-3xl font-semibold text-slate-800 mt-2">—</p>
+            <p class="text-xs text-slate-400 mt-1">Disponible en Parte 2</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wide">Citas hoy</p>
+            <p class="text-3xl font-semibold text-slate-800 mt-2">—</p>
+            <p class="text-xs text-slate-400 mt-1">Disponible en Parte 3</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wide">Planes activos</p>
+            <p class="text-3xl font-semibold text-slate-800 mt-2">—</p>
+            <p class="text-xs text-slate-400 mt-1">Disponible en Parte 4</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wide">Seguimientos</p>
+            <p class="text-3xl font-semibold text-slate-800 mt-2">—</p>
+            <p class="text-xs text-slate-400 mt-1">Disponible en Parte 5</p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

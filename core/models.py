@@ -1,0 +1,75 @@
+# core/models.py
+# Modelo del perfil profesional del nutricionista.
+# Extiende al User de Django con datos propios del consultorio.
+
+from django.db import models
+from django.contrib.auth.models import User
+from config.choices import EstadoNutricionista
+
+
+class PerfilNutricionista(models.Model):
+    """
+    Perfil profesional del nutricionista que usa el sistema.
+    Se crea automáticamente vía signal cuando se crea un superusuario.
+    El campo 'estado' permite deshabilitar el acceso sin borrar la cuenta ni sus datos.
+    """
+
+    # OneToOne garantiza que cada User tenga a lo sumo un perfil profesional
+    usuario = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="perfil",
+        verbose_name="Usuario",
+    )
+    nombre_completo = models.CharField(
+        max_length=150,
+        verbose_name="Nombre completo",
+    )
+    especialidad = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Especialidad",
+        help_text="Ej: Nutrición clínica, deportiva, pediátrica",
+    )
+    telefono = models.CharField(
+        max_length=20,
+        blank=True,
+        verbose_name="Teléfono",
+    )
+    email_profesional = models.EmailField(
+        blank=True,
+        verbose_name="Email profesional",
+    )
+    numero_colegiatura = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name="Número de colegiatura",
+    )
+    direccion_consultorio = models.TextField(
+        blank=True,
+        verbose_name="Dirección del consultorio",
+    )
+    # El campo estado permite al admin deshabilitar el acceso sin eliminar la cuenta.
+    # La login_view valida que estado == 'habilitado' antes de permitir el ingreso.
+    estado = models.CharField(
+        max_length=20,
+        choices=EstadoNutricionista.CHOICES,
+        default=EstadoNutricionista.HABILITADO,
+        verbose_name="Estado",
+    )
+    fecha_registro = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Fecha de registro",
+    )
+
+    class Meta:
+        verbose_name = "Perfil de Nutricionista"
+        verbose_name_plural = "Perfiles de Nutricionistas"
+
+    def __str__(self):
+        return f"{self.nombre_completo or self.usuario.username}"
+
+    @property
+    def esta_habilitado(self):
+        """Devuelve True si el nutricionista puede acceder al sistema."""
+        return self.estado == EstadoNutricionista.HABILITADO

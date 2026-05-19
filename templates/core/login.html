@@ -1,0 +1,106 @@
+<!-- templates/core/login.html -->
+<!-- Página de login: formulario centrado, minimalista, paleta teal/slate. -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iniciar sesión en NutriSync — Plataforma de gestión para nutricionistas">
+    <title>Iniciar Sesión — NutriSync</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }</script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+
+<body class="bg-slate-50 font-sans min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-md px-4">
+
+        <!-- Mensajes de error/info antes del formulario -->
+        {% if messages %}
+        <div class="mb-4 space-y-2">
+            {% for message in messages %}
+            <div class="px-4 py-3 rounded-lg text-sm font-medium
+                {% if message.tags == 'success' %}bg-emerald-50 border border-emerald-200 text-emerald-800
+                {% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-800
+                {% else %}bg-blue-50 border border-blue-200 text-blue-800{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Card de login -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+
+            <!-- Logo / Header -->
+            <div class="text-center mb-8">
+                <i data-lucide="apple" class="w-12 h-12 mx-auto mb-3 text-teal-600"></i>
+                <h1 class="text-2xl font-semibold text-slate-800">NutriSync</h1>
+                <p class="text-slate-400 text-sm mt-1">Plataforma de Gestión para Nutricionistas</p>
+            </div>
+
+            <!-- Formulario -->
+            <form method="post" action="{% url 'core:login' %}" novalidate>
+                {% csrf_token %}
+
+                <div class="space-y-4">
+                    <!-- Usuario -->
+                    <div>
+                        <label for="id_username"
+                            class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                            Usuario
+                        </label>
+                        <input type="text" id="id_username" name="username" autocomplete="username" required class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 text-sm
+                                      focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+                                      transition-all duration-200 placeholder-slate-300"
+                            placeholder="Tu usuario de acceso">
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div>
+                        <label for="id_password"
+                            class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">
+                            Contraseña
+                        </label>
+                        <input type="password" id="id_password" name="password" autocomplete="current-password" required
+                            class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 text-sm
+                                      focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+                                      transition-all duration-200 placeholder-slate-300" placeholder="••••••••">
+                    </div>
+
+                    <!-- Botón de ingreso -->
+                    <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 active:bg-teal-800
+                                   text-white font-medium rounded-lg px-4 py-2.5 text-sm
+                                   transition-all duration-200 mt-2 shadow-sm hover:shadow-md">
+                        Ingresar al sistema
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-xs text-slate-400 mt-6">
+            NutriSync &mdash; Solo para nutricionistas autorizados
+        </p>
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+</body>
+
+</html>
