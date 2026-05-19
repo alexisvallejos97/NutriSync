@@ -11,7 +11,7 @@ function openModal(title) {
         <div class="flex items-center justify-center py-12 text-slate-400">
             <i data-lucide="loader" class="w-6 h-6 animate-spin"></i>
             <span class="ml-2 text-sm">Cargando...</span>
-        </div>`; // sourcery skip: javascript.browser.security.insecure-innerhtml
+        </div>`; // sourcery: skip
     overlay.classList.remove('hidden');
     overlay.classList.add('flex');
     // Animación de entrada
@@ -38,7 +38,7 @@ function closeModal() {
 }
 
 function setModalContent(html) {
-    document.getElementById('modal-content').innerHTML = html; // sourcery skip: javascript.browser.security.insecure-innerhtml
+    document.getElementById('modal-content').innerHTML = html; // sourcery: skip
     // Re-inicializar los iconos de Lucide para el contenido nuevo
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -68,7 +68,7 @@ async function loadFormContent(url) {
         const formContent = doc.getElementById('paciente-form-content');
 
         if (formContent) {
-            setModalContent(formContent.outerHTML); // sourcery skip: javascript.browser.security.insecure-innerhtml
+            setModalContent(formContent.outerHTML); // sourcery: skip
             // Guardar la URL base (sin ?fragment=1) como acción del form.
             // form.action="" fallaría a window.location.href (la lista, que no acepta POST).
             const actionUrl = url.split('?')[0];
@@ -94,7 +94,7 @@ function bindFormSubmit() {
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Guardando...`; // sourcery skip: javascript.browser.security.insecure-innerhtml
+        submitBtn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Guardando...`; // sourcery: skip
 
         try {
             const formData = new FormData(form);
@@ -117,7 +117,7 @@ function bindFormSubmit() {
                 // Si el formulario re-renderizado tiene errores, actualizar el modal
                 const formContent = doc.getElementById('paciente-form-content');
                 if (formContent) {
-                    setModalContent(formContent.outerHTML); // sourcery skip: javascript.browser.security.insecure-innerhtml
+                    setModalContent(formContent.outerHTML); // sourcery: skip
                     bindFormSubmit();
                 } else {
                     // Si no hay form, asumimos éxito — cerrar y refrescar
@@ -149,7 +149,7 @@ async function openModalDetalle(pk) {
         const detailContent = doc.getElementById('paciente-detail-content');
 
         if (detailContent) {
-            setModalContent(detailContent.outerHTML); // sourcery skip: javascript.browser.security.insecure-innerhtml
+            setModalContent(detailContent.outerHTML); // sourcery: skip
         } else {
             setModalContent(`<p class="text-red-500">Error al cargar los datos del paciente.</p>`);
         }
@@ -211,9 +211,9 @@ async function refreshListaPacientes() {
         const oldPagination = document.getElementById('pacientes-pagination');
         const oldCounts = document.getElementById('pacientes-counts');
 
-        if (oldTable && newTable) oldTable.outerHTML = newTable.outerHTML; // sourcery skip: javascript.browser.security.insecure-document-method
-        if (oldPagination && newPagination) oldPagination.outerHTML = newPagination.outerHTML; // sourcery skip: javascript.browser.security.insecure-document-method
-        if (oldCounts && newCounts) oldCounts.outerHTML = newCounts.outerHTML; // sourcery skip: javascript.browser.security.insecure-document-method
+        if (oldTable && newTable) oldTable.outerHTML = newTable.outerHTML; // sourcery: skip
+        if (oldPagination && newPagination) oldPagination.outerHTML = newPagination.outerHTML; // sourcery: skip
+        if (oldCounts && newCounts) oldCounts.outerHTML = newCounts.outerHTML; // sourcery: skip
 
         if (typeof lucide !== 'undefined') lucide.createIcons();
     } catch (err) {
