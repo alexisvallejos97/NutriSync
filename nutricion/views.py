@@ -154,6 +154,11 @@ class PlanListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["q"] = self.request.GET.get("q", "")
         context["filtro_estado"] = self.request.GET.get("estado", "")
+        # Pasamos los pacientes activos del nutricionista para el empty state
+        # Permite crear un plan directamente desde esta página sin ir a la ficha
+        context["pacientes_disponibles"] = Paciente.objects.filter(
+            nutricionista=self.request.user, estado=True
+        ).order_by("apellido", "nombre")
         return context
 
 
