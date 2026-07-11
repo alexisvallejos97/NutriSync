@@ -751,7 +751,7 @@
         document.getElementById('drawer-paciente-nombre').innerText = "Cargando...";
         document.getElementById('drawer-paciente-edad').innerText = "—";
         document.getElementById('drawer-paciente-telefono').innerText = "—";
-        document.getElementById('drawer-paciente-objetivo').innerText = "—";
+        document.getElementById('drawer-paciente-email').innerText = "—";
         document.getElementById('drawer-fecha').innerText = "—";
         document.getElementById('drawer-hora').innerText = "—";
         document.getElementById('drawer-tipo').innerText = "—";
@@ -807,9 +807,9 @@
                     document.getElementById('drawer-btn-cancelar').style.display = 'flex';
                     document.getElementById('drawer-btn-recordatorio').style.display = 'flex';
 
-                    document.getElementById('drawer-paciente-edad').innerText = `${data.paciente_edad} • Femenino`; // O el sexo correspondiente
+                    document.getElementById('drawer-paciente-edad').innerText = `${data.paciente_edad} • ${data.paciente_sexo}`;
                     document.getElementById('drawer-paciente-telefono').innerText = data.paciente_telefono;
-                    document.getElementById('drawer-paciente-objetivo').innerText = data.paciente_objetivo;
+                    document.getElementById('drawer-paciente-email').innerText = data.paciente_email;
                     document.getElementById('drawer-peso').innerText = data.ultimo_peso;
                     document.getElementById('drawer-imc').innerText = data.imc_actual;
                     document.getElementById('drawer-ultima-consulta').innerText = data.ultima_consulta;
