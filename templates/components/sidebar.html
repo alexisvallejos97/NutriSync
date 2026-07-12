@@ -60,6 +60,11 @@
             class="sidebar-link {% if request.resolver_match.namespace == 'seguimiento' and request.resolver_match.url_name == 'notas_dashboard' %}active{% endif %}">
             <i data-lucide="clipboard-list" class="w-5 h-5"></i> Notas Clínicas
         </a>
+
+        <a href="{% url 'reportes:dashboard' %}"
+            class="sidebar-link {% if request.resolver_match.namespace == 'reportes' %}active{% endif %}">
+            <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Reportes
+        </a>
     </nav>
 
     <!-- Sección inferior: perfil y logout -->
